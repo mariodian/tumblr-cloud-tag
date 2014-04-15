@@ -135,42 +135,42 @@ $.fn.cloudTag = function(options){
 		
 		var tagList = '';
 
-    	for( var i = 0; i < tags.length; i++ )
-    	{
-    		var tag = tags[i],
-    			tagName = tag.name,
-    			tagCount = tag.count,
-            	frequency = '';
-                          		
-    		if( tagCount < 5 )
-    		{
-    			frequency = 'barely';
-    		}
-    		else if( tagCount < 12 )
-    		{
-    			frequency = 'sometimes';
-    		}
-    		else if( tagCount < 25 )
-    		{
-    			frequency = 'frequent';
-    		}
-    		else if( tagCount < 50 ) 
-    		{
-    			frequency = 'normal';
-    		}
-    		else
-    		{
-    			frequency = 'always';
-    		}
-    		
-    		var showCount = (settings.showCount) ? ' ' + settings.countDelimeterLeft + tagCount + settings.countDelimeterRight : '';
-    		
-    		tagList += '<li><a href="/tagged/' + tagName.replace(/\s+/g, '-') + '" class="' + frequency + '">' + tagName + showCount + '</a></li>';
-    	}
-    	
-    	return tagList;
-    }
-	
+		for( var i = 0; i < tags.length; i++ )
+		{
+			var tag = tags[i],
+				tagName = tag.name,
+				tagCount = tag.count,
+				frequency = '';
+		  		
+			if( tagCount < 5 )
+			{
+				frequency = 'barely';
+			}
+			else if( tagCount < 12 )
+			{
+				frequency = 'sometimes';
+			}
+			else if( tagCount < 25 )
+			{
+				frequency = 'frequent';
+			}
+			else if( tagCount < 50 ) 
+			{
+				frequency = 'normal';
+			}
+			else
+			{
+				frequency = 'always';
+			}
+			
+			var showCount = (settings.showCount) ? ' ' + settings.countDelimeterLeft + tagCount + settings.countDelimeterRight : '';
+			
+			tagList += '<li><a href="/tagged/' + tagName.replace(/\s+/g, '-') + '" class="' + frequency + '">' + tagName + showCount + '</a></li>';
+		}
+
+		return tagList;
+	}
+
 	// Disable AJAX caching because of Firefox
 	$.ajaxSetup({
 		cache: false
