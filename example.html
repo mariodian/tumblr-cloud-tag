@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<head>
+	<meta charset="utf-8">	
+	<title>jQuery Tumblr Cloud Tag</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<link rel="stylesheet" href="./jquery.tumblr.cloud-tag.min.css">
+
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script src="./jquery.tumblr.cloud-tag.min.js"></script>
+	
+<style>
+body {
+	font: 15px "Helvetica Neue", Arial, sans-serif;
+}
+pre {
+	border: 1px solid #ddd;
+	background: #eee;
+	padding: 10px;
+}
+#cloud-tag {
+	font-size: 18px;
+}
+</style>
+
+<script>
+
+$(document).ready(function(){
+	$('#cloud-tag').cloudTag({
+        apiKey: 'Auz32UHaIC0066mg14fQZ4QL0okrR9HDfIy9ylnj3vQfq7NGm5',
+        tumblrSite: 'mariodian-test.tumblr.com',
+        autoSize: true
+    });
+});
+
+</script>
+	
+</head>
+
+<body>
+	<h1>jQuery Tumblr Cloud Tag</h1>
+	
+	<p>TumblrCloudTag is a simple plugin that let's you retrieve all tags from your blog and display it in a list.</p>
+	
+	<p>It has no external dependencies other than jQuery.</p>
+	
+	<h2>Example</h2>
+	
+	<p><ul id="cloud-tag">
+	</ul></p>
+	
+	
+	<h2>How to Use</h2>
+	
+	<p>Include css inside a head element:</p>
+	
+	<pre><code>&lt;link rel="stylesheet" href="jquery.tumblr.cloud-tag.css"&gt;</code></pre>
+	
+	<p>Include javascript inside a head element:</p>
+	
+	<pre><code>&lt;script src="jquery.tumblr.cloud-tag.js"&gt;&lt;/script&gt;</code></pre>
+	
+	<p>Load the plugin:</p>
+	
+	<pre><code>&lt;script&gt;
+$(document).ready(function(){
+    $('#cloud-tag').cloudTag({
+        apiKey: 'your-api-key',
+        tumblrSite: 'your-blog.tumblr.com',
+    });
+});
+&lt;/script&gt;</code></pre>
+	
+	<p>Add little bit of html where tags would be inserted:</p>
+	
+	<pre><code>&lt;ul id="cloud-tag"&gt;&lt;/ul&gt;</code></pre>
+	
+	<h2>Parameters</h2>
+	
+	<p><b>apiKey</b> - your tumblr API key that you need to register</p>
+	
+	<p><b>tumblrSite</b> - link to your tumblr site e.g. mariodian.tumblr.com</p>
+	
+	<p><b>sortBy</b> [alpha | count, default: 'alpha'] - sort the list of tags by number of occurance or alphabeticaly</p>
+	
+	<p><b>showCount</b> [true | false, default: false] - show a number of each tags used in posts</p>
+	
+	<p><b>countDelimeterLeft</b> [default: '('] - left delimeter for a number of tags</p>
+	
+	<p><b>countDelimeterRight</b> [default: ')'] - right delimeter for a number of tags</p>
+	
+	<p><b>autoSize</b> [true | false, default: false] - change font size according to tag frequency</p>
+</body>
+    
+</html>
