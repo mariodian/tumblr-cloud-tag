@@ -7,7 +7,8 @@ $.fn.cloudTag = function(options){
 		showCount: false,
 		countDelimeterLeft: '(',
 		countDelimeterRight: ')',
-		sortBy: 'name'
+		sortBy: 'name',
+		autoSize: false,
 	}, options );
 
 	var self = this,
@@ -133,7 +134,13 @@ $.fn.cloudTag = function(options){
 			});
 		}
 		
-		var tagList = '';
+		var tagList = '',
+			totalCounts = 0;
+		
+		for( var i = 0; i < tags.length; i++ )
+		{
+			totalCounts += tags[i].count;
+		}
 
 		for( var i = 0; i < tags.length; i++ )
 		{
@@ -142,25 +149,30 @@ $.fn.cloudTag = function(options){
 				tagCount = tag.count,
 				frequency = '';
 		  		
-			if( tagCount < 5 )
+			if( settings.autoSize )
 			{
-				frequency = 'barely';
-			}
-			else if( tagCount < 12 )
-			{
-				frequency = 'sometimes';
-			}
-			else if( tagCount < 25 )
-			{
-				frequency = 'frequent';
-			}
-			else if( tagCount < 50 ) 
-			{
-				frequency = 'normal';
-			}
-			else
-			{
-				frequency = 'always';
+				var percentage = (100/totalCounts) * tagCount;
+			
+				if( percentage < 20 )
+				{
+					frequency = 'freq-1';
+				}
+				else if( percentage < 40 )
+				{
+					frequency = 'freq-2';
+				}
+				else if( percentage < 60 )
+				{
+					frequency = 'freq-3';
+				}
+				else if( percentage < 80 )
+				{
+					frequency = 'freq-4';
+				}
+				else if( percentage < 100 )
+				{
+					frequency = 'freq-5';
+				}
 			}
 			
 			var showCount = (settings.showCount) ? ' ' + settings.countDelimeterLeft + tagCount + settings.countDelimeterRight : '';
