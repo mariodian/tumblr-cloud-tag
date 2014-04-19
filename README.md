@@ -6,11 +6,11 @@ It has no external dependencies other than jQuery.
 
 Include css inside a head element:
 
-    <link rel="stylesheet" href="jquery.tumblr.cloud-tag.css">
+    <link rel="stylesheet" href="jquery.tumblr.cloud-tag.min.css">
 
 Include javascript inside a head element:
 
-    <script src="jquery.tumblr.cloud-tag.js"></script>
+    <script src="jquery.tumblr.cloud-tag.min.js"></script>
 
 Load the plugin:
     
