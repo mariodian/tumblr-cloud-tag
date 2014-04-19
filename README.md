@@ -32,10 +32,12 @@ Add little bit of html where tags would be inserted:
 
 **tumblrSite** - link to your tumblr site e.g. mariodian.tumblr.com
 
-**sortBy** (count | alpha) - sort the list of tags by number of occurance or alphabeticaly
+**sortBy** [alpha | count, default: 'alpha'] - sort the list of tags by number of occurance or alphabeticaly
 
-**showCount** (true | false) - show a number of each tags used in posts
+**showCount** [true | false, default: false] - show a number of each tags used in posts
 
-**countDelimeterLeft** - left delimeter for a number of tags
+**countDelimeterLeft** [default: '('] - left delimeter for a number of tags
 
-**countDelimeterRight** - right delimeter for a number of tags
+**countDelimeterRight** [default: ')'] - right delimeter for a number of tags
+
+**autoSize** [true | false, default: false] - change font size according to tag frequency
