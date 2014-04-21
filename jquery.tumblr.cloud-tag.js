@@ -9,11 +9,20 @@ $.fn.cloudTag = function(options){
 		countDelimeterRight: ')',
 		sortBy: 'name',
 		autoSize: false,
-	}, options );
+	}, options);
 
 	var self = this,
 		totalPosts = 0,
 		totalTags = 0;
+	
+	/**
+	* Get number of all posts
+	**/	
+	var getTotalPosts = function(data){
+		totalPosts = data.response.blog.posts;
+		
+		getTagList();
+	}
 
 	/**
 	*	Fetch posts and get unique list of tags
@@ -28,7 +37,7 @@ $.fn.cloudTag = function(options){
 			cache: false
 		});
 		
-		prepareTags = function(data)
+		var prepareTags = function(data)
 		{			
 			var posts = data.response.posts;
 		
@@ -79,8 +88,11 @@ $.fn.cloudTag = function(options){
 				
 				data:{
 					api_key: settings.apiKey,
-					offset: counter,
-					jsonp: 'prepareTags'
+					offset: counter
+				},
+				
+				success: function(json){
+					prepareTags(json);
 				}
 			});
 			
@@ -188,20 +200,17 @@ $.fn.cloudTag = function(options){
 		cache: false
 	});
 	
-	getPosts = function(data)
-	{
-		totalPosts = data.response.blog.posts;
-		
-		getTagList();
-	}
-	
 	$.ajax({
 		type: 'GET',
 		url: 'http://api.tumblr.com/v2/blog/' + settings.tumblrSite + '/info',
 		dataType: 'jsonp',
+		
 		data: {
-			api_key: settings.apiKey,
-			jsonp: 'getPosts'
+			api_key: settings.apiKey
+		},
+		
+		success: function(json){
+			getTotalPosts(json);
 		}
 	});
 };
