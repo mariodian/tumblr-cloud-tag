@@ -51,7 +51,6 @@ $.fn.cloudTag = function(options){
 					
 					if( !JSON.stringify(tagList).match('"' + temp_tag + '"') ) // Tag doesn't exist so add it
 					{
-						console.log(temp_tag)
 						tagList.push({name: temp_tag, count: 1});
 					}
 					else // Increment count for the current tag
