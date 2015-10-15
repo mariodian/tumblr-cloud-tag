@@ -42,4 +42,4 @@ Add little bit of html where tags would be inserted:
 
 **autoSize** [true | false, default: false] - change font size according to tag frequency
 
-**maxTags** [<number>, default: null] - how many tags to show e.g. 50. null = unlimited
+**maxTags** [number, default: null] - how many tags to show e.g. 50. null = unlimited
