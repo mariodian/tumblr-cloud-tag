@@ -9,6 +9,7 @@ $.fn.cloudTag = function(options){
 		countDelimeterRight: ')',
 		sortBy: 'name',
 		autoSize: false,
+		maxTags: null
 	}, options);
 
 	var self = this,
@@ -148,13 +149,13 @@ $.fn.cloudTag = function(options){
 		
 		var tagList = '',
 			totalCounts = 0;
-		
+					
 		for( var i = 0; i < tags.length; i++ )
 		{
 			totalCounts += tags[i].count;
 		}
 
-		for( var i = 0; i < tags.length; i++ )
+		for( var i = 0; i < (settings.maxTags || tags.length); i++ )
 		{
 			var tag = tags[i],
 				tagName = tag.name,
