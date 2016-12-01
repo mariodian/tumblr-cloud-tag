@@ -1,7 +1,7 @@
 /**
 *	Create cloud tag for your tumblr blog
 **/
-$.fn.cloudTag = function(options){	
+$.fn.cloudTag = function(options){
 	var settings = $.extend({
 		tumblrSite: location.hostname,
 		showCount: false,
@@ -15,41 +15,41 @@ $.fn.cloudTag = function(options){
 	var self = this,
 		totalPosts = 0,
 		totalTags = 0;
-	
+
 	/**
 	* Get number of all posts
-	**/	
+	**/
 	var getTotalPosts = function(data){
 		totalPosts = data.response.blog.posts;
-		
+
 		getTagList();
 	}
 
 	/**
 	*	Fetch posts and get unique list of tags
 	**/
-	var getTagList = function(){	
+	var getTagList = function(){
 		var counter = 0,
 			internalCounter = 20,
 			tagList = [];
-					
+
 		// Disable AJAX caching because of Firefox
 		$.ajaxSetup({
 			cache: false
 		});
-		
+
 		var prepareTags = function(data)
-		{			
+		{
 			var posts = data.response.posts;
-		
+
 			for( var i = 0; i < posts.length; i++ )
 			{
 				var tags = posts[i].tags;
-				
+
 				for( var j = 0; j < tags.length; j++ )
 				{
 					var temp_tag = tags[j];
-					
+
 					if( !JSON.stringify(tagList).match('"' + temp_tag + '"') ) // Tag doesn't exist so add it
 					{
 						tagList.push({name: temp_tag, count: 1});
@@ -64,39 +64,39 @@ $.fn.cloudTag = function(options){
 							}
 						}
 					}
-					
+
 					totalTags++;
 				}
 			}
-				
+
 			if( internalCounter >= totalPosts ) // Show tags if everythig is fetched and prepared
-			{	
+			{
 				$(self).html(displayTags(tagList));
 			}
 			else
 			{
 				internalCounter += 20;
 			}
-			
+
 		}
 
 		while( counter < totalPosts )
 		{
 			$.ajax({
 				type: 'GET',
-				url: 'http://api.tumblr.com/v2/blog/' + settings.tumblrSite + '/posts',
+				url: 'https://api.tumblr.com/v2/blog/' + settings.tumblrSite + '/posts',
 				dataType: 'jsonp',
-				
+
 				data:{
 					api_key: settings.apiKey,
 					offset: counter
 				},
-				
+
 				success: function(json){
 					prepareTags(json);
 				}
 			});
-			
+
 			counter += 20;
 		}
 	}
@@ -118,7 +118,7 @@ $.fn.cloudTag = function(options){
 				{
 					return 1;
 				}
-				
+
 				// Sort by name
 				if( a.name < b.name )
 				{
@@ -142,14 +142,14 @@ $.fn.cloudTag = function(options){
 				{
 					return 1;
 				}
-					
+
 				return 0;
 			});
 		}
-		
+
 		var tagList = '',
 			totalCounts = 0;
-					
+
 		for( var i = 0; i < tags.length; i++ )
 		{
 			totalCounts += tags[i].count;
@@ -161,11 +161,11 @@ $.fn.cloudTag = function(options){
 				tagName = tag.name,
 				tagCount = tag.count,
 				frequency = '';
-		  		
+
 			if( settings.autoSize )
 			{
 				var percentage = (100/totalCounts) * tagCount;
-			
+
 				if( percentage < 20 )
 				{
 					frequency = 'freq-1';
@@ -187,9 +187,9 @@ $.fn.cloudTag = function(options){
 					frequency = 'freq-5';
 				}
 			}
-			
+
 			var showCount = (settings.showCount) ? ' ' + settings.countDelimeterLeft + tagCount + settings.countDelimeterRight : '';
-			
+
 			tagList += '<li><a href="/tagged/' + tagName.replace(/\s+/g, '-') + '" class="' + frequency + '">' + tagName + showCount + '</a></li>';
 		}
 
@@ -200,16 +200,16 @@ $.fn.cloudTag = function(options){
 	$.ajaxSetup({
 		cache: false
 	});
-	
+
 	$.ajax({
 		type: 'GET',
-		url: 'http://api.tumblr.com/v2/blog/' + settings.tumblrSite + '/info',
+		url: 'https://api.tumblr.com/v2/blog/' + settings.tumblrSite + '/info',
 		dataType: 'jsonp',
-		
+
 		data: {
 			api_key: settings.apiKey
 		},
-		
+
 		success: function(json){
 			getTotalPosts(json);
 		}
